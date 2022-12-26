@@ -1,0 +1,16 @@
+{
+    "name": "bas-world/developer-challenge-pay-dates",
+    "description": "Salary Pay Date tool for a year.",
+    "type": "library",
+    "require": {
+        "php": ">=7.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "BasWorld\\": "src/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
