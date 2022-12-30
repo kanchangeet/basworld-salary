@@ -2,7 +2,7 @@
 namespace BasWorld\Salary;
 use RuntimeException;
 
-class CSalaryPayDatesModule extends CSalaryPayDates{
+class CSalaryPayDatesModule {
 
 	public const DIRECTORY_NAME = 'salary_data';
 
@@ -10,7 +10,6 @@ class CSalaryPayDatesModule extends CSalaryPayDates{
 	 * Constructor function
 	 */
 	public function __construct() {
-		parent::__construct();
     }
 
 	/**
@@ -35,13 +34,14 @@ class CSalaryPayDatesModule extends CSalaryPayDates{
 		}
 
 		$arrstrSalaryData[] = $this->getHeaderTitle();
+		$objSalaryPayDates  = new CSalaryPayDates;
 
 		for( $i=1; $i<=12; $i++ ) {
 			$strFirstDayOfMonth             	= date( 'd-m-Y', strtotime( '01-'.$i.'-'.$intYear ) );
 			$objFirstDay 			            = date_create($strFirstDayOfMonth);
 			$arrstrSalaryData[$i]['month'] 	    = date( 'F', strtotime( $strFirstDayOfMonth ) );//exit;
-			$arrstrSalaryData[$i]['bonus_date'] = $this->getBonusDate($objFirstDay);
-			$arrstrSalaryData[$i]['pay_date'] 	= $this->getSalaryDate($objFirstDay);
+			$arrstrSalaryData[$i]['bonus_date'] = $objSalaryPayDates->getBonusDate($objFirstDay);
+			$arrstrSalaryData[$i]['pay_date'] 	= $objSalaryPayDates->getSalaryDate($objFirstDay);
 		}
 
 		$objCSVWriter->writeIntoCSV( $strFilePath, $arrstrSalaryData );
